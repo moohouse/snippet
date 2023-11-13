@@ -1,0 +1,9 @@
+[%autowidth.stretch, cols="h,a"]
+|===
+|Base package
+|`is.moo.snippet.modulith.blog.catalog`
+|Spring components
+|_Services_
+
+* `i.m.s.m.b.c.ProductService`
+|===

@@ -1,0 +1,50 @@
+g15:37:29.741 [Test worker] INFO com.tngtech.archunit.core.PluginLoader -- Detected Java version 17.0.7
+# News
+> Logical name: news
+2> Base package: is.moo.snippet.modulith.blog.news
+> Named interfaces:
+]  + NamedInterface: name=<<UNNAMED>>, types=[ i.m.s.m.b.n.NewsDTO, i.m.s.m.b.n.NewsService ]
+n  + NamedInterface: name=breaking, types=[ i.m.s.m.b.n.b.BreakingNewsDTO, i.m.s.m.b.n.b.BreakingNewsService ]
+> Spring beans:
+  + ….NewsService
+%  + ….breaking.BreakingNewsService
+1  o ….breaking.internal.BreakingNewsController
+1  o ….breaking.internal.BreakingNewsRepository
+   o ….internal.NewsController
+   o ….internal.NewsRepository
+
+
+# Catalog
+> Logical name: catalog
+5> Base package: is.moo.snippet.modulith.blog.catalog
+> Spring beans:
+  + ….ProductService
+#  o ….internal.ProductController
+#  o ….internal.ProductRepository
+
+
+# Pricing
+> Logical name: pricing
+5> Base package: is.moo.snippet.modulith.blog.pricing
+> Spring beans:
+  + ….PricingService
+#  o ….internal.PricingRepository
+
+# Notification
+> Logical name: notification
+:> Base package: is.moo.snippet.modulith.blog.notification
+> Spring beans:
+  + ….NotificationService
+
+# Home
+> Logical name: home
+2> Base package: is.moo.snippet.modulith.blog.home
+> Spring beans:
+  + ….HomeController
+
+# Transaction
+> Logical name: transaction
+9> Base package: is.moo.snippet.modulith.blog.transaction
+> Spring beans:
+  + ….TransactionService
+

@@ -1,0 +1,24 @@
+vpc,name,purpose,position,type,from_port,to_port,protocol,source,src_sg,description
+moo_dev,dev_bastion_pub,bastion,pub,ingress,1194,1194,udp,0.0.0.0/0,,OpenVPN
+moo_dev,dev_bastion_pub,bastion,pub,ingress,22,22,tcp,0.0.0.0/0,,
+moo_dev,dev_bastion_pub,bastion,pub,egress,0,0,-1,0.0.0.0/0,,
+moo_dev,dev_rds_pri,rds,pri,ingress,3306,3306,tcp,,dev_bastion_pub,From bastion
+moo_dev,dev_rds_pri,rds,pri,ingress,3306,3306,tcp,172.18.0.0/16,,dms
+moo_dev,dev_rds_pri,rds,pri,ingress,3306,3306,tcp,172.21.0.0/16,,moo_local_dms
+moo_dev,dev_rds_pri,rds,pri,ingress,3306,3306,tcp,,dev_ekscluster_pri,From eks cluster
+moo_dev,dev_rds_pri,rds,pri,ingress,5432,5432,tcp,,dev_bastion_pub,From bastion
+moo_dev,dev_rds_pri,rds,pri,ingress,5432,5432,tcp,,dev_ekscluster_pri,From eks cluster
+moo_dev,dev_rds_pri,rds,pri,egress,0,0,-1,0.0.0.0/0,,
+moo_dev,dev_vpce_pri,vpce,pri,ingress,0,65535,tcp,0.0.0.0/0,,
+moo_dev,dev_vpce_pri,vpce,pri,egress,0,0,-1,0.0.0.0/0,,
+moo_dev,dev_ekscluster_pri,ekscluster,pri,ingress,0,0,-1,self,,
+moo_dev,dev_ekscluster_pri,ekscluster,pri,ingress,443,443,tcp,,dev_mwaa_pri,mwaa
+moo_dev,dev_ekscluster_pri,ekscluster,pri,egress,0,0,-1,0.0.0.0/0,,
+moo_dev,dev_efs_pri,efs,pri,ingress,2049,2049,tcp,,dev_efsec2_pri,
+moo_dev,dev_efs_pri,efs,pri,ingress,2049,2049,tcp,,dev_ekscluster_pri,
+moo_dev,dev_efs_pri,efs,pri,egress,0,0,-1,0.0.0.0/0,,
+moo_dev,dev_efsec2_pri,efsec2,pri,ingress,22,22,tcp,,dev_bastion_pub,From bastion
+moo_dev,dev_efsec2_pri,efsec2,pri,ingress,2049,2049,tcp,,dev_efs_pri,From efs
+moo_dev,dev_efsec2_pri,efsec2,pri,egress,0,0,-1,0.0.0.0/0,,
+moo_dev,dev_mwaa_pri,mwaa,pri,ingress,0,0,-1,self,,
+moo_dev,dev_mwaa_pri,mwaa,pri,egress,0,0,-1,0.0.0.0/0,,

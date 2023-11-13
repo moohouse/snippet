@@ -1,0 +1,88 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "airflow:PublishMetrics",
+            "Resource": "arn:aws:airflow:ap-northeast-2:629822539430:environment/mwaa"
+        },
+        {
+            "Effect": "Deny",
+            "Action": "s3:ListAllMyBuckets",
+            "Resource": [
+                "arn:aws:s3:::mwaa",
+                "arn:aws:s3:::mwaa/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::mwaa",
+                "arn:aws:s3:::mwaa/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:CreateLogGroup",
+                "logs:PutLogEvents",
+                "logs:GetLogEvents",
+                "logs:GetLogRecord",
+                "logs:GetLogGroupFields",
+                "logs:GetQueryResults"
+            ],
+            "Resource": [
+                "arn:aws:logs:ap-northeast-2:629822539430:log-group:airflow-mwaa-*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:DescribeLogGroups"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": "cloudwatch:PutMetricData",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sqs:ChangeMessageVisibility",
+                "sqs:DeleteMessage",
+                "sqs:GetQueueAttributes",
+                "sqs:GetQueueUrl",
+                "sqs:ReceiveMessage",
+                "sqs:SendMessage"
+            ],
+            "Resource": "arn:aws:sqs:ap-northeast-2:*:airflow-celery-*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey",
+                "kms:GenerateDataKey*",
+                "kms:Encrypt"
+            ],
+            "NotResource": "arn:aws:kms:*:629822539430:key/*",
+            "Condition": {
+                "StringLike": {
+                    "kms:ViaService": [
+                        "sqs.ap-northeast-2.amazonaws.com"
+                    ]
+                }
+            }
+        }
+    ]
+}

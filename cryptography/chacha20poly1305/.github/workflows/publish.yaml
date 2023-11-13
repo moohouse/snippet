@@ -1,0 +1,24 @@
+name: publish-library-cryptography
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  build:
+    name: Publish library to Github Package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup environment for Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Run Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: publish --scan
+        env:
+          REPOSITORY_USERNAME: ${{ secrets.REPOSITORY_USERNAME }}
+          REPOSITORY_PACKAGE_TOKEN: ${{ secrets.REPOSITORY_PACKAGE_TOKEN }}

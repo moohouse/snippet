@@ -1,0 +1,30 @@
+name: Generate terraform docs
+on:
+  push:
+  pull_request:
+    types: [opened]
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+    - name: Render terraform docs inside the README.md and push changes back to PR branch
+      uses: terraform-docs/gh-actions@v1.0.0
+      with:
+        find-dir: modules/
+        output-file: README.md
+        output-method: inject
+        git-push: "false"
+        config-file: .terraform-docs.yml
+    - name: terraform-fmt
+      uses: dflook/terraform-fmt@v1.29.1
+      with :
+        path : ./11
+    - name: Commit & Push changes
+      uses: actions-js/push@v1.4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref_name }}
+        message: "terraform fmt & docs"

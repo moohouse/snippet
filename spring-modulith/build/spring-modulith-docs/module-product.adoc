@@ -1,0 +1,11 @@
+[%autowidth.stretch, cols="h,a"]
+|===
+|Base package
+|`kr.co.mz.modulith.blog.product`
+|Spring components
+|_Services_
+
+* `k.c.m.m.b.p.ProductService`
+|Bean references
+|* `k.c.m.m.b.n.NotificationService` (in Notification)
+|===

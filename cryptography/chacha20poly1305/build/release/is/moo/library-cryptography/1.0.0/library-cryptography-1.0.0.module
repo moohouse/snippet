@@ -1,0 +1,69 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "is.moo",
+    "module": "library-cryptography",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.4.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "library-cryptography-1.0.0.jar",
+          "url": "library-cryptography-1.0.0.jar",
+          "size": 2251,
+          "sha512": "bd09e56d055396498995856adad1671efbc8e8b99340024c29b27ff0fa3e424765204298e0c44533a09804b732777198561c2b92cf89abdb6506882c22e43a9a",
+          "sha256": "2a0c9c31770d1da16a81ad8481df0ef5176a7d676eaa5d9200c903fc4da561c7",
+          "sha1": "b484ad045fc0ad47b35ae7d850791c0eef74d54d",
+          "md5": "59852f3bac31a298eadf1d412772876e"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "commons-codec",
+          "module": "commons-codec",
+          "version": {
+            "requires": "1.15"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "library-cryptography-1.0.0.jar",
+          "url": "library-cryptography-1.0.0.jar",
+          "size": 2251,
+          "sha512": "bd09e56d055396498995856adad1671efbc8e8b99340024c29b27ff0fa3e424765204298e0c44533a09804b732777198561c2b92cf89abdb6506882c22e43a9a",
+          "sha256": "2a0c9c31770d1da16a81ad8481df0ef5176a7d676eaa5d9200c903fc4da561c7",
+          "sha1": "b484ad045fc0ad47b35ae7d850791c0eef74d54d",
+          "md5": "59852f3bac31a298eadf1d412772876e"
+        }
+      ]
+    }
+  ]
+}

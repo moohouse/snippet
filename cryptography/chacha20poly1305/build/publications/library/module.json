@@ -1,0 +1,69 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "is.moo",
+    "module": "library-cryptography",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.4.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "library-cryptography-1.0.0.jar",
+          "url": "library-cryptography-1.0.0.jar",
+          "size": 2270,
+          "sha512": "f9062013baddf5a0fc44cd2d083afbfaf0950b8c36a141035736d85313f27b7569f65a869944daaf091d6d0847ec2df52b9fc27e1927d8806234b7b327c18d69",
+          "sha256": "8792d4ef15d4384cdcf44f94f1d63fdfa56a2e86713307adedc6cbc2b655f73b",
+          "sha1": "1711fa6dc0795ca973d1e4a1b3f89f374fd71d92",
+          "md5": "83a9c05ef257821d60b2d9a15c04c281"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "commons-codec",
+          "module": "commons-codec",
+          "version": {
+            "requires": "1.15"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "library-cryptography-1.0.0.jar",
+          "url": "library-cryptography-1.0.0.jar",
+          "size": 2270,
+          "sha512": "f9062013baddf5a0fc44cd2d083afbfaf0950b8c36a141035736d85313f27b7569f65a869944daaf091d6d0847ec2df52b9fc27e1927d8806234b7b327c18d69",
+          "sha256": "8792d4ef15d4384cdcf44f94f1d63fdfa56a2e86713307adedc6cbc2b655f73b",
+          "sha1": "1711fa6dc0795ca973d1e4a1b3f89f374fd71d92",
+          "md5": "83a9c05ef257821d60b2d9a15c04c281"
+        }
+      ]
+    }
+  ]
+}

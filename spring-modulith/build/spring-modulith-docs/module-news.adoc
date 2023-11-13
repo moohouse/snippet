@@ -1,0 +1,10 @@
+[%autowidth.stretch, cols="h,a"]
+|===
+|Base package
+|`is.moo.snippet.modulith.blog.news`
+|Spring components
+|_Services_
+
+* `i.m.s.m.b.n.NewsService`
+* `i.m.s.m.b.n.breaking.BreakingNewsService`
+|===

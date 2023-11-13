@@ -1,0 +1,1 @@
+package is.moo.snippet.modulith.blog.catalog;

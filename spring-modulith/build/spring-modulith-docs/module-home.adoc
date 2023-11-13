@@ -1,0 +1,13 @@
+[%autowidth.stretch, cols="h,a"]
+|===
+|Base package
+|`is.moo.snippet.modulith.blog.home`
+|Spring components
+|_Controllers_
+
+* `i.m.s.m.b.h.HomeController`
+|Bean references
+|* `i.m.s.m.b.p.PricingService` (in Pricing)
+* `i.m.s.m.b.c.ProductService` (in Catalog)
+* `i.m.s.m.b.n.NewsService` (in News)
+|===
