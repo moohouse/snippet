@@ -1,0 +1,159 @@
+plugins {
+	id 'java'
+	id 'war'
+	id 'org.springframework.boot' version '3.1.5'
+	id 'io.spring.dependency-management' version '1.1.3'
+}
+
+group = 'is.moo.snippet'
+version = 'local'
+
+def tag = project.hasProperty("tag") ? tag : "local"
+
+java {
+	sourceCompatibility = '17'
+	targetCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'io.micrometer:micrometer-tracing-bridge-otel'
+	implementation 'io.opentelemetry:opentelemetry-exporter-otlp'
+
+
+	implementation 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+bootBuildImage {
+
+	imageName  =  'snippet-buildpack:'+tag
+	tags 	   =  ['snippet-buildpack:latest']
+	pullPolicy =  'IF_NOT_PRESENT'
+	builder    =  'dashaun/builder:base'
+
+	buildpacks =  [
+	        "paketo-buildpacks/java",
+			"gcr.io/paketo-buildpacks/opentelemetry"
+	]
+	/**
+	 * Build-time :    BP_
+	 * Runtime    :    BPL_
+	 * Image embeded : BPE_
+	 */
+
+
+	environment = [
+			"BP_JVM_VERSION" : "17",
+			"BP_OPENTELEMETRY_ENABLED": "true",
+			"BPE_OTEL_JAVAAGENT_ENABLED" : "true",
+			"BPE_OTEL_METRICS_EXPORTER" : "none",
+			"BPE_TZ" : "Asia/Seoul",
+			"BPE_DELIM_JAVA_TOOL_OPTIONS" : " ",
+			"BPE_APPEND_JAVA_TOOL_OPTIONS" : "-XX:+HeapDumpOnOutOfMemoryError"
+	]
+
+	buildCache {
+		volume {
+			name = "cache-${rootProject.name}.build"
+		}
+	}
+	launchCache {
+		volume {
+			name = "cache-${rootProject.name}.launch"
+		}
+	}
+
+//	publish = true
+//	docker {
+//		publishRegistry {
+//			url 	 = ""
+//			username = "user"
+//			password = "secret"
+//		}
+//	}
+
+//	buildArgs = [
+//			"JAVA_VERSION": "17",
+//			"SPRING_PROFILES_ACTIVE": "local"
+//	]
+//	baseImage = "bellsoft/liberica-openjre-alpine:17"
+//	// jvmFlags = ["-Xmx256m"]
+//	layers = true
+//	watch = true
+//	cloudNativeBuildpacks {
+//		buildpacks = ["bellsoft/buildpacks.liberica:latest"]
+//		memory = "256m"
+//		debug = true
+//	}
+
+//	bootBuildImage {
+//		imageName = "my-app"
+//		imageTag = "v1.0.0"
+//		imagePullPolicy = "Always"
+//		buildArgs = [
+//				"JAVA_VERSION": "11",
+//				"SPRING_PROFILES_ACTIVE": "dev"
+//		]
+//		baseImage = "openjdk:11-jdk"
+//		jvmFlags = ["-Xms128m", "-Xmx256m"]
+//		mainClass = "com.example.MyApplication"
+//		dependencies {
+//			implementation 'org.springframework.boot:spring-boot-starter-web:3.0.0-M1'
+//		}
+//		layers = true
+//		watch = true
+//
+//		cloudNativeBuildpacks {
+//			buildpacks = ["gcr.io/buildpacks/java:v3"]
+//			buildpack-registry = "gcr.io/buildpacks"
+//			buildpack-version = "latest"
+//			memory = "256m"
+//			timeout = "10m"
+//			debug = true
+//		}
+//	}
+
+//	imageName = "my-app"
+//	imageTag = "v1.0.0"
+//	imagePullPolicy = "Always"
+//	buildArgs = [
+//			"JAVA_VERSION": "11",
+//			"SPRING_PROFILES_ACTIVE": "dev"
+//	]
+//	baseImage = "openjdk:11-jdk"
+//	jvmFlags = ["-Xms128m", "-Xmx256m"]
+//	mainClass = "com.example.MyApplication"
+//	dependencies {
+//		implementation 'org.springframework.boot:spring-boot-starter-web'
+//	}
+//	layers = true
+//	watch = true
+//
+
+//	builder   = 'paketobuildpacks/builder-jammy-tiny:latest'
+//	runImage  = 'paketobuildpacks/run-jammy-tiny:latest'
+//	buildpacks = ['paketobuildpacks/java']
+////	binding("bindnings/bellsoft-jre-config:/platform/bindings/bellsoft-jre-config")
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
