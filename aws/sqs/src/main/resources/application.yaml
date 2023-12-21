@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: snippet-aws-sqs
+  task:
+    execution:
+      pool:
+        core-size: 8
+        max-size: 16
+        queue-capacity: 16
+        keep-alive: 60s
+  cloud:
+    aws:
+      credentials:
+        profile:
+          name: mz-dev
+logging:
+  level:
+    root: info
+    io.awspring.cloud: debug
+  pattern:
+    console: "[%date{ISO8601}] [%-5level] [%thread] [%MDC{traceId},%MDC{spanId}] %logger{1.}.%method#%line - %message%n"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+  tracing:
+    sampling:
+      probability: 1.0
